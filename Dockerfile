@@ -1,7 +1,8 @@
 FROM innovanon/ia-tither as builder
 
 FROM innovanon/autofdo as converter
-COPY --from=builder   /var/cpuminer/ /var/cpuminer.data/
+#COPY --from=builder   /var/cpuminer/ /var/cpuminer.data/
+COPY ./var/cpuminer/data /var/cpuminer.data/
 RUN create_gcov                    \
       --binary=$PREFIX/xmrig       \
       --profile=/var/cpuminer.data \
