@@ -91,10 +91,7 @@ COPY --from=builder /tmp/xmrig.sh               \
                     /tmp/DonateStrategy.cpp.sed \
                     /tmp/Config_default.h       \
                                      /tmp/
-RUN chmod -v +x                   \
-      /tmp/donate.h.sed           \
-      /tmp/DonateStrategy.cpp.sed \
- && ./xmrig.sh     2              \
+RUN ./xmrig.sh     2              \
  && rm -rf /tmp/*
 
 # TODO
