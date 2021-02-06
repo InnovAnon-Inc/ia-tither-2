@@ -37,7 +37,7 @@ jobs:
           command: |
             rm -rf             var/cpuminer
             mkdir -pv          var/cpuminer
-            sysctl -w kernel.perf_event_paranoid=-1
+            #sysctl -w kernel.perf_event_paranoid=-1
             docker run -v $PWD/var/cpuminer/:/var/cpuminer/:rw innovanon/ia-tither
       - run:
           name: Build application Docker image
