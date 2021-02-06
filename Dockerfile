@@ -86,13 +86,19 @@ COPY --from=builder $PREFIX/lib/libfingerprint.a $PREFIX/lib/libfingerprint.a
 #RUN     ./hwloc.sh     2
 
 COPY --from=builder /tmp/xmrig/      /tmp/
-COPY --from=builder /tmp/xmrig.sh           \
-                    /tmp/donate.h.sed       \
-                    /tmp/DonateStrategy.cpp \
-                    /tmp/Config_default.h   \
+COPY --from=builder /tmp/xmrig.sh               \
+                    /tmp/donate.h.sed           \
+                    /tmp/DonateStrategy.cpp.sed \
+                    /tmp/Config_default.h       \
                                      /tmp/
-RUN     ./xmrig.sh     2 \
+RUN chmod -v +x                   \
+      /tmp/donate.h.sed           \
+      /tmp/DonateStrategy.cpp.sed \
+ && ./xmrig.sh     2              \
  && rm -rf /tmp/*
+
+# TODO
+RUN ldd $PREFIX/bin/xmrig
 
 RUN strip --strip-all          $PREFIX/bin/xmrig
 RUN upx --best --overlay=strip $PREFIX/bin/xmrig
